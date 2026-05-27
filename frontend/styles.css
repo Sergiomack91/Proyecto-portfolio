@@ -1,0 +1,17 @@
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f2ef; margin: 0; padding: 20px; color: #333; }
+.container { max-width: 800px; margin: 0 auto; }
+.header-card { background: white; padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 0 0 1px rgba(0,0,0,.15); text-align: center; border-top: 8px solid #0a66c2; }
+.header-card h1 { margin: 0; font-size: 28px; color: #000; }
+.header-card h2 { margin: 10px 0 0 0; font-size: 18px; color: #666; font-weight: normal; }
+.section-card { background: white; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
+.section-card h3 { margin-top: 0; color: #000; font-size: 20px; border-bottom: 1px solid #ebebeb; padding-bottom: 10px; }
+.job, .edu { margin-bottom: 20px; }
+.job:last-child, .edu:last-child { margin-bottom: 0; }
+.job-title { font-weight: 600; font-size: 16px; margin: 0 0 5px 0; }
+.company { color: #0a66c2; font-weight: 500; font-size: 15px; margin: 0 0 5px 0; }
+.date { color: #666; font-size: 14px; margin: 0 0 10px 0; }
+.description { font-size: 14px; line-height: 1.5; margin: 0; }
+.skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-badge { background-color: #eef3f8; color: #000; font-weight: 600; padding: 6px 12px; border-radius: 16px; font-size: 14px; }
+.interests-list { padding-left: 20px; margin: 0; line-height: 1.6; }
+.loading { text-align: center; font-size: 1.2em; color: #666; padding: 50px; }

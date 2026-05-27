@@ -3,54 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio DevOps - Sergio</title>
+    <title>Sergio Rodríguez Quintana - Portfolio</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f0f2f5; color: #333; }
-        .container { max-width: 800px; margin: auto; }
-        h1 { color: #2c3e50; text-align: center; }
-        h2 { color: #34495e; text-align: center; font-weight: normal; margin-bottom: 30px; }
-        .card { background: white; padding: 20px; margin: 15px 0; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #3498db; }
-        .tech-tag { display: inline-block; background: #e1f0fa; color: #2980b9; padding: 5px 10px; margin: 5px; border-radius: 15px; font-size: 0.9em; font-weight: bold; }
-        .loading { text-align: center; font-size: 1.2em; color: #7f8c8d; margin-top: 50px; }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app" class="container">
-        
         <div v-if="!perfil.nombre" class="loading">
-            ⚙️ Conectando con la API de Python para cargar el perfil...
+            <i class="fas fa-spinner fa-spin"></i> Conectando con la API...
         </div>
         
         <div v-else>
-            <h1>{{ perfil.nombre }}</h1>
-            <h2>{{ perfil.titular }}</h2>
+            <div class="header-card">
+                <h1>{{ perfil.nombre }}</h1>
+                <h2>{{ perfil.titular }}</h2>
+            </div>
 
-            <div class="card">
+            <div class="section-card">
                 <h3>Sobre mí</h3>
-                <p>{{ perfil.formacion }}</p>
-                <p>{{ perfil.perfil }}</p>
+                <p class="description">{{ perfil.sobre_mi }}</p>
             </div>
 
-            <div class="card">
-                <h3>Stack Tecnológico</h3>
-                <div>
-                    <span class="tech-tag" v-for="tech in perfil.tecnologias" :key="tech">{{ tech }}</span>
+            <div class="section-card">
+                <h3>Experiencia</h3>
+                <div class="job" v-for="(exp, index) in perfil.experiencia" :key="index">
+                    <p class="job-title">{{ exp.puesto }}</p>
+                    <p class="company">{{ exp.empresa }}</p>
+                    <p class="date">{{ exp.fecha }}</p>
+                    <p class="description">{{ exp.descripcion }}</p>
                 </div>
             </div>
 
-            <div class="card">
-                <h3>Experiencia y Proyectos</h3>
-                <div v-for="exp in perfil.experiencia" :key="exp.empresa">
-                    <h4>{{ exp.puesto }} en {{ exp.empresa }}</h4>
-                    <p><em>{{ exp.fecha }}</em></p>
-                    <p>{{ exp.descripcion }}</p>
+            <div class="section-card">
+                <h3>Educación</h3>
+                <div class="edu" v-for="(edu, index) in perfil.educacion" :key="index">
+                    <p class="job-title">{{ edu.titulo }}</p>
+                    <p class="company">{{ edu.institucion }}</p>
+                    <p class="date">{{ edu.fecha }}</p>
                 </div>
             </div>
 
-            <div class="card">
-                <h3>Intereses</h3>
-                <ul>
+            <div class="section-card">
+                <h3>Conocimientos y Aptitudes</h3>
+                <div class="skills-container">
+                    <span class="skill-badge" v-for="skill in perfil.skills" :key="skill">{{ skill }}</span>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3>Intereses y Hobbies</h3>
+                <ul class="interests-list">
                     <li v-for="interes in perfil.intereses" :key="interes">{{ interes }}</li>
                 </ul>
             </div>
@@ -64,8 +67,7 @@
                 const perfil = ref({});
                 onMounted(async () => {
                     try {
-                        // Ojo: Hemos cambiado la ruta a /api/profile
-                        const response = await fetch('http://localhost:8000/api/profile');
+                        const response = await fetch('http://localhost:8081/api/profile');
                         perfil.value = await response.json();
                     } catch (error) {
                         console.error("Error conectando al backend:", error);
