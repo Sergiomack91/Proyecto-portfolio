@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio DevOps - Sergio</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 800px; margin: auto; }
+        h1 { color: #2c3e50; text-align: center; }
+        h2 { color: #34495e; text-align: center; font-weight: normal; margin-bottom: 30px; }
+        .card { background: white; padding: 20px; margin: 15px 0; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #3498db; }
+        .tech-tag { display: inline-block; background: #e1f0fa; color: #2980b9; padding: 5px 10px; margin: 5px; border-radius: 15px; font-size: 0.9em; font-weight: bold; }
+        .loading { text-align: center; font-size: 1.2em; color: #7f8c8d; margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <div id="app" class="container">
+        
+        <div v-if="!perfil.nombre" class="loading">
+            ⚙️ Conectando con la API de Python para cargar el perfil...
+        </div>
+        
+        <div v-else>
+            <h1>{{ perfil.nombre }}</h1>
+            <h2>{{ perfil.titular }}</h2>
+
+            <div class="card">
+                <h3>Sobre mí</h3>
+                <p>{{ perfil.formacion }}</p>
+                <p>{{ perfil.perfil }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Stack Tecnológico</h3>
+                <div>
+                    <span class="tech-tag" v-for="tech in perfil.tecnologias" :key="tech">{{ tech }}</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Experiencia y Proyectos</h3>
+                <div v-for="exp in perfil.experiencia" :key="exp.empresa">
+                    <h4>{{ exp.puesto }} en {{ exp.empresa }}</h4>
+                    <p><em>{{ exp.fecha }}</em></p>
+                    <p>{{ exp.descripcion }}</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Intereses</h3>
+                <ul>
+                    <li v-for="interes in perfil.intereses" :key="interes">{{ interes }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, onMounted } = Vue;
+        createApp({
+            setup() {
+                const perfil = ref({});
+                onMounted(async () => {
+                    try {
+                        // Ojo: Hemos cambiado la ruta a /api/profile
+                        const response = await fetch('http://localhost:8000/api/profile');
+                        perfil.value = await response.json();
+                    } catch (error) {
+                        console.error("Error conectando al backend:", error);
+                    }
+                });
+                return { perfil };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
