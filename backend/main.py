@@ -36,7 +36,7 @@ def get_profile():
             }
         ],
         "intereses": [
-            "Juegos de mesa"
+            "Juegos de mesa",
             "Fútbol español (UD Almería, Real Betis, RCD Mallorca)",
             "Música en streaming (Natos y Waor, Reality, Marea, Extremoduro)"
         ]
