@@ -67,7 +67,7 @@
                 const perfil = ref({});
                 onMounted(async () => {
                     try {
-                        const response = await fetch('http://localhost:8000/api/profile');
+                        const response = await fetch('http://api.pruebasergio.com/api/profile');
                         perfil.value = await response.json();
                     } catch (error) {
                         console.error("Error conectando al backend:", error);
