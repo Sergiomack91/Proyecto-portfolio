@@ -14,7 +14,15 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: mack91/portfolio-frontend:v1
+        image: mack91/portfolio-frontend:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "10m"       # Lo mínimo que el clúster le reserva
+            memory: "64Mi"
+          limits:
+            cpu: "100m"      # El "techo" máximo (10% de un núcleo)
+            memory: "128Mi"
         ports:
         - containerPort: 80
 ---

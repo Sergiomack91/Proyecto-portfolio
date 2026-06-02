@@ -14,7 +14,15 @@ spec:
     spec:
       containers:
       - name: backend
-        image: mack91/portfolio-backend:v1
+        image: mack91/portfolio-backend:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "50m"       
+            memory: "128Mi"
+          limits:
+            cpu: "250m"      # Límite de 1/4 de núcleo
+            memory: "256Mi"
         ports:
         - containerPort: 8000
 ---

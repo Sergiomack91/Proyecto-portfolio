@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.middlewares: monitoring-redirect-to-https@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - grafana.pruebasergio.com
+    secretName: grafana-tls-secret
+  rules:
+  - host: grafana.pruebasergio.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-stack-grafana
+            port:
+              number: 80
