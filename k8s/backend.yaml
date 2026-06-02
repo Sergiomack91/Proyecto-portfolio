@@ -25,6 +25,16 @@ spec:
             memory: "256Mi"
         ports:
         - containerPort: 8000
+        livenessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 10   # Espera 10s antes de preguntar la primera vez
+          periodSeconds: 15         # Vuelve a preguntar cada 15 segundos
+        readinessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 5    # Empieza a comprobar si está listo a los 5s
+          periodSeconds: 10         # Comprueba cada 10 segundos
 ---
 apiVersion: v1
 kind: Service
