@@ -1,62 +1,53 @@
-# 🚀 Portfolio Web App - Cloud & DevOps Infrastructure
+# Portfolio Técnico - Arquitectura Cloud Native & DevOps
 
-Este repositorio contiene el código fuente y la configuración de infraestructura de mi portfolio personal. El proyecto destaca por una arquitectura moderna, contenerizada y orquestada, desplegada bajo prácticas de Integración y Despliegue Continuo (CI/CD).
+Este repositorio contiene el código fuente y la Infraestructura como Código (IaC) para el despliegue automatizado de mi portfolio personal. El proyecto está diseñado y operado bajo principios de **Alta Disponibilidad (HA)**, **Self-Healing** y **GitOps**, simulando un entorno de producción corporativo.
 
-🌍 **Live Demo:** [https://www.pruebasergio.com](https://www.pruebasergio.com)
-
----
-
-## 🛠️ Stack Tecnológico y Arquitectura
-
-El proyecto está dividido en microservicios y gestionado íntegramente mediante orquestación de contenedores.
-
-**Desarrollo:**
-* **Frontend:** Vue.js 3 (Production Build) + HTML/CSS
-* **Backend / API:** Python + FastAPI
-* **Contenedores:** Docker
-
-**Operaciones e Infraestructura (Cloud):**
-* **Orquestación:** Kubernetes (K3s) desplegado en un VPS (Ubuntu).
-* **Enrutamiento y Proxy Inverso:** Traefik Ingress Controller.
-* **Seguridad y SSL:** Certificados automáticos Let's Encrypt gestionados mediante `cert-manager`.
-* **Middlewares:** Redirección forzada de HTTP a HTTPS y de dominio raíz a subdominio `www` a nivel de clúster.
-* **Seguridad del Servidor:** Acceso mediante llaves SSH y protección activa con Fail2Ban.
-
-**Automatización:**
-* **CI/CD Pipeline:** GitHub Actions (optimizadas para Node 24).
-* **Registry:** Docker Hub.
+🌐 **Entorno de Producción:** [https://www.pruebasergio.com](https://www.pruebasergio.com)
 
 ---
 
-## 🏗️ Estructura del Proyecto
+## 🏗️ Arquitectura del Sistema
 
-El repositorio está organizado en las siguientes capas lógicas:
+El sistema está orquestado sobre un clúster de Kubernetes (K3s) y se divide en los siguientes componentes principales:
 
-```text
-.
-├── .github/workflows/   # Pipelines de CI/CD para automatización de despliegues
-├── backend/             # Código fuente y Dockerfile de la API en Python (FastAPI)
-├── frontend/            # Código fuente, assets (SVG Favicons) y Dockerfile (Vue.js)
-├── portfolio-k8s/       # Manifiestos de Kubernetes (Deployment, Service, Ingress, Middlewares)
-└── README.md            # Documentación del proyecto
+* **Frontend:** SPA desarrollada en Vue.js, servida de forma ligera.
+* **Backend:** API REST desarrollada en Python.
+* **Ingress Controller:** Traefik v2 gestionando el enrutamiento y los Middlewares (redirecciones de HTTP a HTTPS y de bare-domain a www).
+* **Gestión de Certificados:** Cert-Manager integrado con Let's Encrypt para la renovación automática de certificados SSL/TLS.
+* **Observabilidad:** Stack completo de `kube-prometheus-stack` (Prometheus, Alertmanager y Grafana) para la monitorización en tiempo real de nodos y pods.
 
-⚙️ Flujo de CI/CD (GitHub Actions)
-El despliegue está totalmente automatizado. Cada vez que se realiza un push a la rama main, el pipeline de GitHub Actions ejecuta las siguientes fases:
+---
 
-Checkout: Clona el código más reciente del repositorio.
+## 🛡️ Resiliencia y Control de Recursos (Ingeniería de Fiabilidad)
 
-Build & Push: Construye las imágenes Docker actualizadas tanto para el frontend como para el backend y las sube a Docker Hub.
+Para garantizar la estabilidad del nodo y la experiencia del usuario bajo estrés, los despliegues de Kubernetes implementan las siguientes políticas:
 
-Deploy: Se conecta de forma segura al clúster K3s a través de SSH y aplica los manifiestos de Kubernetes para reiniciar los pods con las nuevas imágenes de forma transparente (Zero-Downtime Deployment).
+1. **Gestión de Recursos (QoS):** Todos los contenedores tienen configurados `Requests` y `Limits` estrictos de CPU y Memoria RAM para evitar la saturación del servidor (OOMKilled) y el efecto "vecino ruidoso".
+2. **Horizontal Pod Autoscaling (HPA):** Escalado dinámico basado en métricas. El frontend y el backend escalan automáticamente sus réplicas si el consumo de CPU supera el umbral objetivo del 70-75%, repartiendo la carga ante picos de tráfico repentinos.
+3. **Sondas de Salud (Probes):** Implementación de `Liveness` y `Readiness` probes mediante comprobaciones TCP. El clúster aísla automáticamente los contenedores que no están listos para recibir tráfico y reinicia automáticamente aquellos que sufren bloqueos internos (*Self-Healing*).
+4. **Zero-Downtime Deployments:** Estrategia de `RollingUpdate` garantizada durante las subidas a producción.
 
-🔒 Gestión de Red y Seguridad (Ingress & Middlewares)
-El clúster está configurado para gestionar el tráfico de forma inteligente mediante Traefik:
+---
 
-Subdominios dinámicos: La API responde en api.pruebasergio.com, mientras que el frontend responde en www.pruebasergio.com.
+## ⚙️ Integración y Despliegue Continuo (CI/CD)
 
-Redirecciones automáticas: Se han implementado Traefik Middlewares nativos (redirectRegex y redirectScheme) para asegurar que todo el tráfico entrante desde http:// o sin las www sea enrutado a una conexión 100% segura.
+El ciclo de vida del software está completamente automatizado a través de **GitHub Actions**. Al integrar código en la rama `main`, el pipeline ejecuta de forma desatendida:
 
-Auto-SSL: cert-manager negocia y renueva los certificados criptográficos en la sombra sin intervención manual.
+1. Construcción de imágenes Docker para Frontend y Backend.
+2. Push de las imágenes etiquetadas al registro de Docker Hub.
+3. Sincronización segura por SSH de los manifiestos declarativos (`.yaml`) ubicados en la carpeta `/k8s` hacia el servidor VPS.
+4. Aplicación de los cambios de infraestructura (`kubectl apply`) y reinicio de los *Deployments* para inyectar las nuevas versiones sin cortes de servicio.
+
+---
+
+## 📂 Estructura de Directorios Principal
+
+* `/frontend/`: Código fuente de la aplicación Vue.js y su respectivo `Dockerfile`.
+* `/backend/`: Código fuente de la API en Python y su respectivo `Dockerfile`.
+* `/k8s/`: Manifiestos declarativos de Kubernetes (Deployments, Services, Ingress, HPA, Middlewares, etc.).
+* `/.github/workflows/`: Definición de los pipelines de CI/CD.
+
+---
 
 👨‍💻 Autor
 Sergio Rodríguez Quintana
