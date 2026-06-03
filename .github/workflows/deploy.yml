@@ -56,11 +56,15 @@ jobs:
         username: root
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          # Entrar en la carpeta recién copiada
+          echo "Entrando a la carpeta de manifiestos..."
           cd ~/k8s
           
+          echo "Archivos recibidos en el servidor:"
+          ls -la
+          
+          echo "Aplicando configuración en Kubernetes..."
           # Aplicar cualquier cambio en los YAML (límites de CPU, nuevas rutas, etc.)
-          kubectl apply -f .
+          kubectl apply -R -f .
           
           # Forzar el reinicio para asegurar que toman la nueva imagen de Docker
           kubectl rollout restart deployment/backend-deployment
