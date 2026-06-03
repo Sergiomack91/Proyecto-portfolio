@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: limitador-bots
+spec:
+  rateLimit:
+    average: 20      # Promedio de 20 peticiones por segundo
+    burst: 50        # Permite una ráfaga máxima de 50 peticiones de golpe
+    sourceCriterion:
+      ipStrategy: {} # Aplica el castigo por IP individual, no a todo el tráfico
