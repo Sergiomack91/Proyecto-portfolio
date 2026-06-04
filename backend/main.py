@@ -48,10 +48,11 @@ def get_profile():
             "Troubleshooting"
         ],
         "intereses": [
-            "Amante de los juegos de mesa",
+            "Me encanta viajar",
+            "Amante de los juegos de mesa y tiempo con amigos",
             "Tecnología: Automatización de infraestructura y cultura DevOps.",
             "Deportes: Seguidor de la UD Almería, Snowboard, Crossfit, Padel.",
-            "Música: Natos y Waor, Reality."
+            "Música: Marea, Extremoduro, Natos y Waor, Reality."
         ],
         "proyectos": [
             {
