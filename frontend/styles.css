@@ -255,9 +255,18 @@ body {
 }
 
 .download-btn {
+   background: rgba(56, 189, 248, 0.1);
+    color: var(--accent-primary);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    transition: all 0.2s ease;
+}
+.download-btn:hover {
     background: var(--accent-primary);
     color: #000;
-    font-weight: 700;
-    border: none;
-    padding: 10px 24px;
+    transform: translateY(-2px);
 }
