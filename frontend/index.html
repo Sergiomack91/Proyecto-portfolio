@@ -13,50 +13,56 @@
 <body>
     <div id="app" class="container">
         <div v-if="!perfil.nombre" class="loading">
-            <i class="fas fa-spinner fa-spin"></i> Conectando con la API...
+            <div class="spinner"></div>
+            <p>Conectando con la API Cloud...</p>
         </div>
         
-        <div v-else>
+        <div v-else class="fade-in">
             <div class="header-card">
+                <div class="profile-glow"></div>
                 <h1>{{ perfil.nombre }}</h1>
-                <h2>{{ perfil.titular }}</h2>
+                <h2><i class="fas fa-terminal"></i> {{ perfil.titular }}</h2>
             </div>
 
             <div class="section-card">
-                <h3>Sobre mí</h3>
+                <h3><i class="fas fa-user-astronaut"></i> Sobre mí</h3>
                 <p class="description">{{ perfil.sobre_mi }}</p>
             </div>
 
             <div class="section-card">
-                <h3>Experiencia</h3>
+                <h3><i class="fas fa-server"></i> Experiencia</h3>
                 <div class="job" v-for="(exp, index) in perfil.experiencia" :key="index">
+                    <div class="timeline-dot"></div>
                     <p class="job-title">{{ exp.puesto }}</p>
-                    <p class="company">{{ exp.empresa }}</p>
-                    <p class="date">{{ exp.fecha }}</p>
+                    <p class="company"><i class="far fa-building"></i> {{ exp.empresa }} <span>| <i class="far fa-calendar-alt"></i> {{ exp.fecha }}</span></p>
                     <p class="description">{{ exp.descripcion }}</p>
                 </div>
             </div>
 
             <div class="section-card">
-                <h3>Educación</h3>
+                <h3><i class="fas fa-graduation-cap"></i> Educación</h3>
                 <div class="edu" v-for="(edu, index) in perfil.educacion" :key="index">
                     <p class="job-title">{{ edu.titulo }}</p>
-                    <p class="company">{{ edu.institucion }}</p>
-                    <p class="date">{{ edu.fecha }}</p>
+                    <p class="company"><i class="fas fa-university"></i> {{ edu.institucion }}</p>
+                    <p class="date"><i class="far fa-calendar-check"></i> {{ edu.fecha }}</p>
                 </div>
             </div>
 
             <div class="section-card">
-                <h3>Conocimientos y Aptitudes</h3>
+                <h3><i class="fas fa-code-branch"></i> Stack Tecnológico</h3>
                 <div class="skills-container">
-                    <span class="skill-badge" v-for="skill in perfil.skills" :key="skill">{{ skill }}</span>
+                    <span class="skill-badge" v-for="skill in perfil.skills" :key="skill">
+                        {{ skill }}
+                    </span>
                 </div>
             </div>
 
             <div class="section-card">
-                <h3>Intereses y Hobbies</h3>
+                <h3><i class="fas fa-gamepad"></i> Intereses</h3>
                 <ul class="interests-list">
-                    <li v-for="interes in perfil.intereses" :key="interes">{{ interes }}</li>
+                    <li v-for="interes in perfil.intereses" :key="interes">
+                        <i class="fas fa-check-circle accent-color"></i> {{ interes }}
+                    </li>
                 </ul>
             </div>
         </div>
