@@ -24,105 +24,101 @@
                 <div class="profile-glow"></div>
                 <h1>{{ perfil.nombre }}</h1>
                 <h2><i class="fas fa-terminal"></i> {{ perfil.titular }}</h2>
-
-                <div class="social-links" v-if="perfil.contacto">
+                <div class="social-links">
                     <a :href="perfil.contacto.github" target="_blank" class="social-btn"><i class="fab fa-github"></i>
                         GitHub</a>
                     <a :href="perfil.contacto.linkedin" target="_blank" class="social-btn"><i
                             class="fab fa-linkedin"></i> LinkedIn</a>
                     <button @click="enviarCorreo(perfil.contacto.email_user, perfil.contacto.email_domain)"
-                        class="social-btn">
-                        <i class="fas fa-envelope"></i> Contactar
-                    </button>
-
+                        class="social-btn"><i class="fas fa-envelope"></i> Contactar</button>
                 </div>
-                <a href="/cv_sergio_rodriguez.pdf" download class="social-btn"
-                    style="border-color: var(--accent-secondary);">
-                    <i class="fas fa-file-pdf"></i> Descargar CV
-                </a>
-            </div>
-
-            <div class="section-card">
-                <h3><i class="fas fa-user-astronaut"></i> Sobre mí</h3>
-                <p class="description">{{ perfil.sobre_mi }}</p>
-            </div>
-
-            <div class="section-card">
-                <h3><i class="fas fa-server"></i> Experiencia</h3>
-                <div class="job" v-for="(exp, index) in perfil.experiencia" :key="index">
-                    <div class="timeline-dot"></div>
-                    <p class="job-title">{{ exp.puesto }}</p>
-                    <p class="company"><i class="far fa-building"></i> {{ exp.empresa }} <span>| <i
-                                class="far fa-calendar-alt"></i> {{ exp.fecha }}</span></p>
-                    <p class="description">{{ exp.descripcion }}</p>
+                <div class="cv-container">
+                    <a href="/cv_sergio_rodriguez.pdf" download class="social-btn download-btn">
+                        <i class="fas fa-file-pdf"></i> Descargar CV
+                    </a>
                 </div>
-            </div>
-            <div class="section-card">
-                <h3><i class="fas fa-project-diagram"></i> Proyectos Destacados</h3>
-                <div class="job" v-for="(proyecto, index) in perfil.proyectos" :key="index">
-                    <p class="job-title">{{ proyecto.nombre }}</p>
-                    <p class="description">{{ proyecto.descripcion }}</p>
-                    <div class="skills-container" style="margin-top: 10px; margin-bottom: 15px;">
-                        <span class="skill-badge" style="font-size: 12px; padding: 4px 10px;"
-                            v-for="tech in proyecto.tecnologias" :key="tech">
-                            {{ tech }}
+
+                <div class="section-card">
+                    <h3><i class="fas fa-user-astronaut"></i> Sobre mí</h3>
+                    <p class="description">{{ perfil.sobre_mi }}</p>
+                </div>
+
+                <div class="section-card">
+                    <h3><i class="fas fa-server"></i> Experiencia</h3>
+                    <div class="job" v-for="(exp, index) in perfil.experiencia" :key="index">
+                        <div class="timeline-dot"></div>
+                        <p class="job-title">{{ exp.puesto }}</p>
+                        <p class="company"><i class="far fa-building"></i> {{ exp.empresa }} <span>| <i
+                                    class="far fa-calendar-alt"></i> {{ exp.fecha }}</span></p>
+                        <p class="description">{{ exp.descripcion }}</p>
+                    </div>
+                </div>
+                <div class="section-card">
+                    <h3><i class="fas fa-project-diagram"></i> Proyectos Destacados</h3>
+                    <div class="job" v-for="(proyecto, index) in perfil.proyectos" :key="index">
+                        <p class="job-title">{{ proyecto.nombre }}</p>
+                        <p class="description">{{ proyecto.descripcion }}</p>
+                        <div class="skills-container" style="margin-top: 10px; margin-bottom: 15px;">
+                            <span class="skill-badge" style="font-size: 12px; padding: 4px 10px;"
+                                v-for="tech in proyecto.tecnologias" :key="tech">
+                                {{ tech }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Educación</h3>
+                    <div class="edu" v-for="(edu, index) in perfil.educacion" :key="index">
+                        <p class="job-title">{{ edu.titulo }}</p>
+                        <p class="company"><i class="fas fa-university"></i> {{ edu.institucion }}</p>
+                        <p class="date"><i class="far fa-calendar-check"></i> {{ edu.fecha }}</p>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3><i class="fas fa-code-branch"></i> Stack Tecnológico</h3>
+                    <div class="skills-container">
+                        <span class="skill-badge" v-for="skill in perfil.skills" :key="skill">
+                            {{ skill }}
                         </span>
                     </div>
                 </div>
-            </div>
-            <div class="section-card">
-                <h3><i class="fas fa-graduation-cap"></i> Educación</h3>
-                <div class="edu" v-for="(edu, index) in perfil.educacion" :key="index">
-                    <p class="job-title">{{ edu.titulo }}</p>
-                    <p class="company"><i class="fas fa-university"></i> {{ edu.institucion }}</p>
-                    <p class="date"><i class="far fa-calendar-check"></i> {{ edu.fecha }}</p>
-                </div>
-            </div>
 
-            <div class="section-card">
-                <h3><i class="fas fa-code-branch"></i> Stack Tecnológico</h3>
-                <div class="skills-container">
-                    <span class="skill-badge" v-for="skill in perfil.skills" :key="skill">
-                        {{ skill }}
-                    </span>
+                <div class="section-card">
+                    <h3><i class="fas fa-gamepad"></i> Intereses</h3>
+                    <ul class="interests-list">
+                        <li v-for="interes in perfil.intereses" :key="interes">
+                            <i class="fas fa-check-circle accent-color"></i> {{ interes }}
+                        </li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="section-card">
-                <h3><i class="fas fa-gamepad"></i> Intereses</h3>
-                <ul class="interests-list">
-                    <li v-for="interes in perfil.intereses" :key="interes">
-                        <i class="fas fa-check-circle accent-color"></i> {{ interes }}
-                    </li>
-                </ul>
             </div>
         </div>
-    </div>
 
-    <script>
-        const { createApp, ref, onMounted } = Vue;
-        createApp({
-            setup() {
-                const perfil = ref({});
+        <script>
+            const { createApp, ref, onMounted } = Vue;
+            createApp({
+                setup() {
+                    const perfil = ref({});
 
-                // Función para el contacto seguro
-                const enviarCorreo = (user, domain) => {
-                    window.location.href = `mailto:${user}@${domain}`;
-                };
+                    // Función para el contacto seguro
+                    const enviarCorreo = (user, domain) => {
+                        window.location.href = `mailto:${user}@${domain}`;
+                    };
 
-                onMounted(async () => {
-                    try {
-                        const response = await fetch('https://api.pruebasergio.com/api/profile');
-                        perfil.value = await response.json();
-                    } catch (error) {
-                        console.error("Error conectando al backend:", error);
-                    }
-                });
+                    onMounted(async () => {
+                        try {
+                            const response = await fetch('https://api.pruebasergio.com/api/profile');
+                            perfil.value = await response.json();
+                        } catch (error) {
+                            console.error("Error conectando al backend:", error);
+                        }
+                    });
 
-                return { perfil, enviarCorreo };
-            }
-        }).mount('#app');
-    </script>
+                    return { perfil, enviarCorreo };
+                }
+            }).mount('#app');
+        </script>
 </body>
 
 </html>
