@@ -52,5 +52,29 @@ def get_profile():
             "Tecnología: Automatización de infraestructura y cultura DevOps.",
             "Deportes: Seguidor de la UD Almería, Snowboard, Crossfit, Padel.",
             "Música: Natos y Waor, Reality."
-        ]
+        ],
+        "proyectos": [
+            {
+                "nombre": "Infraestructura Cloud & Homelab",
+                "descripcion": "Diseño, despliegue y administración de un servidor VPS en IONOS (Linux M) con Kubernetes. Incluye Ingress Traefik, monitorización mediante Grafana, Prometheus y Loki, y un sistema de alertas de seguridad automatizado con un bot de Telegram.",
+                "tecnologias": ["Kubernetes", "Traefik", "Grafana", "Loki", "IONOS VPS"]
+            },
+            {
+                "nombre": "Pipeline CI/CD & GitOps",
+                "descripcion": "Despliegue automatizado del portfolio aplicando filosofía GitOps con GitHub Actions. Contenedores Dockerizados, versionado semántico por commit SHA y actualizaciones sin cortes de servicio (Zero-Downtime deployments).",
+                "tecnologias": ["GitHub Actions", "Docker", "Python", "YAML"]
+            },
+            {
+                "nombre": "Sistema de Backups Automatizado",
+                "descripcion": "Implementación de copias de seguridad automatizadas en la nube utilizando Google Drive para salvaguardar los datos críticos del servidor y los manifiestos de la infraestructura, asegurando la recuperación ante desastres.",
+                "tecnologias": ["Bash", "Cron", "Google Drive API", "Linux"]
+            }
+        ],
+        "contacto": {
+            "email_user": "sergiomack91",
+            "email_domain": "gmail.com",
+            "github": "https://github.com/Sergiomack91",
+            "linkedin": "https://www.linkedin.com/in/sergio-rodr%C3%ADguez-quintana-28bbb02a3/"
+        }
+
     }

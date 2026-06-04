@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,41 @@
     <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
 </head>
+
 <body>
     <div id="app" class="container">
         <div v-if="!perfil.nombre" class="loading">
             <div class="spinner"></div>
             <p>Conectando con la API Cloud...</p>
         </div>
-        
+
         <div v-else class="fade-in">
             <div class="header-card">
                 <div class="profile-glow"></div>
                 <h1>{{ perfil.nombre }}</h1>
                 <h2><i class="fas fa-terminal"></i> {{ perfil.titular }}</h2>
+
+                <div class="social-links" v-if="perfil.contacto">
+                    <a :href="perfil.contacto.github" target="_blank" class="social-btn"><i class="fab fa-github"></i>
+                        GitHub</a>
+                    <a :href="perfil.contacto.linkedin" target="_blank" class="social-btn"><i
+                            class="fab fa-linkedin"></i> LinkedIn</a>
+                    <button @click="enviarCorreo(perfil.contacto.email_user, perfil.contacto.email_domain)"
+                        class="social-btn">
+                        <i class="fas fa-envelope"></i> Contactar
+                    </button>
+                    setup() {
+                    // ... tu código anterior
+                    const enviarCorreo = (user, domain) => {
+                    window.location.href = `mailto:${user}@${domain}`;
+                    };
+                    return { perfil, enviarCorreo };
+                    }
+                </div>
+                <a href="/cv_sergio_rodriguez.pdf" download class="social-btn"
+                    style="border-color: var(--accent-secondary);">
+                    <i class="fas fa-file-pdf"></i> Descargar CV
+                </a>
             </div>
 
             <div class="section-card">
@@ -34,11 +58,24 @@
                 <div class="job" v-for="(exp, index) in perfil.experiencia" :key="index">
                     <div class="timeline-dot"></div>
                     <p class="job-title">{{ exp.puesto }}</p>
-                    <p class="company"><i class="far fa-building"></i> {{ exp.empresa }} <span>| <i class="far fa-calendar-alt"></i> {{ exp.fecha }}</span></p>
+                    <p class="company"><i class="far fa-building"></i> {{ exp.empresa }} <span>| <i
+                                class="far fa-calendar-alt"></i> {{ exp.fecha }}</span></p>
                     <p class="description">{{ exp.descripcion }}</p>
                 </div>
             </div>
-
+            <div class="section-card">
+                <h3><i class="fas fa-project-diagram"></i> Proyectos Destacados</h3>
+                <div class="job" v-for="(proyecto, index) in perfil.proyectos" :key="index">
+                    <p class="job-title">{{ proyecto.nombre }}</p>
+                    <p class="description">{{ proyecto.descripcion }}</p>
+                    <div class="skills-container" style="margin-top: 10px; margin-bottom: 15px;">
+                        <span class="skill-badge" style="font-size: 12px; padding: 4px 10px;"
+                            v-for="tech in proyecto.tecnologias" :key="tech">
+                            {{ tech }}
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div class="section-card">
                 <h3><i class="fas fa-graduation-cap"></i> Educación</h3>
                 <div class="edu" v-for="(edu, index) in perfil.educacion" :key="index">
@@ -86,4 +123,5 @@
         }).mount('#app');
     </script>
 </body>
+
 </html>
