@@ -18,13 +18,19 @@ spec:
         imagePullPolicy: Always
         resources:
           requests:
-            cpu: "10m"       # Lo mínimo que el clúster le reserva
+            cpu: "10m"
             memory: "64Mi"
           limits:
-            cpu: "100m"      # El "techo" máximo (10% de un núcleo)
+            cpu: "100m"
             memory: "128Mi"
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
