@@ -14,24 +14,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-class CaptchaVerification(BaseModel):
-    token: str
-
 @app.post("/api/download-cv")
 def download_cv(req: CaptchaVerification):
-    secret_key = "TU_CLAVE_SECRETA_DE_GOOGLE" # En producción, usa variables de entorno
-    verify_url = f"https://www.google.com/recaptcha/api/siteverify"
+    secret_key = os.getenv("RECAPTCHA_SECRET_KEY")
     
-    # Verificamos el token con Google
+    if not secret_key:
+        raise HTTPException(status_code=500, detail="Error de configuración del servidor")
+
+    verify_url = "https://www.google.com/recaptcha/api/siteverify"
     payload = {"secret": secret_key, "response": req.token}
     response = requests.post(verify_url, data=payload).json()
     
-    if response.get("success"):
-        # Si es humano, devolvemos el PDF
-        return FileResponse("cv_sergio_rodriguez.pdf", media_type="application/pdf", filename="CV_Sergio_Rodriguez.pdf")
+    # Verificamos que la petición sea exitosa y el score sea mayor o igual a 0.5
+    if response.get("success") and response.get("score", 0) >= 0.5:
+        return FileResponse("cv_sergio_rodriguez.pdf", media_type="application/pdf", filename="CV_Sergio_Rodríguez.pdf")
     else:
-        raise HTTPException(status_code=400, detail="CAPTCHA inválido o caducado")
+        raise HTTPException(status_code=400, detail="Tráfico sospechoso detectado")
 
 @app.get("/api/profile")
 def get_profile():
