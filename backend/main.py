@@ -34,7 +34,7 @@ def download_cv(req: CaptchaVerification):
     
     # Verificamos que la petición sea exitosa y el score sea mayor o igual a 0.5
     if response.get("success") and response.get("score", 0) >= 0.5:
-        return FileResponse("cv_sergio_rodriguez.pdf", media_type="application/pdf", filename="CV_Sergio_Rodríguez.pdf")
+        return FileResponse("cv_sergio_rodriguez.pdf", media_type="application/pdf", filename="cv_sergio_rodriguez.pdf")
     else:
         raise HTTPException(status_code=400, detail="Tráfico sospechoso detectado")
 
