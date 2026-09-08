@@ -1,15 +1,21 @@
-import requests
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware # IMPORTANTE AÑADIR ESTO
 from pydantic import BaseModel
+import requests
+import os
+import sys
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=[
+        "https://pruebasergio.com", 
+        "https://www.pruebasergio.com",
+        "http://localhost:8080"
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
