@@ -16,25 +16,30 @@ spec:
       - name: backend
         image: mack91/portfolio-backend:latest
         imagePullPolicy: Always
+        - name: RECAPTCHA_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: portfolio-secrets
+              key: recaptcha-secret
         resources:
           requests:
             cpu: "50m"       
             memory: "128Mi"
           limits:
-            cpu: "250m"      # Límite de 1/4 de núcleo
+            cpu: "250m"
             memory: "256Mi"
         ports:
         - containerPort: 8000
         livenessProbe:
           tcpSocket:
             port: 8000
-          initialDelaySeconds: 10   # Espera 10s antes de preguntar la primera vez
-          periodSeconds: 15         # Vuelve a preguntar cada 15 segundos
+          initialDelaySeconds: 10
+          periodSeconds: 15
         readinessProbe:
           tcpSocket:
             port: 8000
-          initialDelaySeconds: 5    # Empieza a comprobar si está listo a los 5s
-          periodSeconds: 10         # Comprueba cada 10 segundos
+          initialDelaySeconds: 5
+          periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service

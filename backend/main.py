@@ -1,5 +1,8 @@
-from fastapi import FastAPI
+import requests
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -11,6 +14,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+class CaptchaVerification(BaseModel):
+    token: str
+
+@app.post("/api/download-cv")
+def download_cv(req: CaptchaVerification):
+    secret_key = "TU_CLAVE_SECRETA_DE_GOOGLE" # En producción, usa variables de entorno
+    verify_url = f"https://www.google.com/recaptcha/api/siteverify"
+    
+    # Verificamos el token con Google
+    payload = {"secret": secret_key, "response": req.token}
+    response = requests.post(verify_url, data=payload).json()
+    
+    if response.get("success"):
+        # Si es humano, devolvemos el PDF
+        return FileResponse("cv_sergio_rodriguez.pdf", media_type="application/pdf", filename="CV_Sergio_Rodriguez.pdf")
+    else:
+        raise HTTPException(status_code=400, detail="CAPTCHA inválido o caducado")
+
 @app.get("/api/profile")
 def get_profile():
     return {
@@ -19,7 +41,7 @@ def get_profile():
         "sobre_mi": "Profesional junior de Operaciones con formación en Administración de Sistemas Informáticos en Red (ASIR) y experiencia en entornos cloud corporativos. Perfil orientado a Cloud/DevOps, con interés en automatización, infraestructura moderna y mejora continua.",
         "experiencia": [
             {
-                "puesto": "Operaciones IT (Proyecto en empresa importante)",
+                "puesto": "Operaciones IT (Proyecto Repsol)",
                 "empresa": "Viewnext",
                 "fecha": "Junio 2026 - Presente",
                 "descripcion": "Participación en proyectos con Microsoft Azure, Kubernetes y procesos CI/CD. Colaboración en despliegues, troubleshooting y soporte de aplicaciones en entornos contenerizados."
