@@ -13,7 +13,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+class CaptchaVerification(BaseModel):
+    token: str
 @app.post("/api/download-cv")
 def download_cv(req: CaptchaVerification):
     secret_key = os.getenv("RECAPTCHA_SECRET_KEY")
