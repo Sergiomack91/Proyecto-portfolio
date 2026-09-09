@@ -42,14 +42,14 @@ def download_cv(req: CaptchaVerification):
 def get_profile():
     return {
         "nombre": "Sergio Rodríguez Quintana",
-        "titular": "Junior Cloud & DevOps Engineer | Operaciones IT",
-        "sobre_mi": "Profesional junior de Operaciones con formación en Administración de Sistemas Informáticos en Red (ASIR) y experiencia en entornos cloud corporativos. Perfil orientado a Cloud/DevOps, con interés en automatización, infraestructura moderna y mejora continua.",
+        "titular": "Cloud & DevOps Engineer | Operaciones IT",
+        "sobre_mi": "Profesional de Operaciones con formación en Administración de Sistemas Informáticos en Red (ASIR) y experiencia en entornos cloud corporativos. Perfil orientado a Cloud/DevOps, con interés en automatización, infraestructura moderna y mejora continua.",
         "experiencia": [
             {
                 "puesto": "Operaciones IT (Proyecto Repsol)",
                 "empresa": "Viewnext",
                 "fecha": "Junio 2026 - Presente",
-                "descripcion": "Participación en proyectos con Microsoft Azure, Kubernetes y procesos CI/CD. Colaboración en despliegues, troubleshooting y soporte de aplicaciones en entornos contenerizados."
+                "descripcion": "Participación en proyectos con Microsoft Azure, Vue, .NET, Python, Kubernetes y procesos CI/CD. Colaboración en despliegues, troubleshooting y soporte de aplicaciones en entornos contenerizados."
             },
             {
                 "puesto": "Prácticas de Operaciones IT",
