@@ -63,6 +63,12 @@ def get_profile():
                 "titulo": "Administración de Sistemas Informáticos en Red (ASIR)",
                 "institucion": "Formación Profesional de Grado Superior",
                 "fecha": "Finalizado"
+            },
+            {
+                "titulo": "GitHub Actions: skills-hello-github-actions",
+                "institucion": "GitHub Skills",
+                "fecha": "Noviembre 2026",
+                "enlace": "https://github.com/Sergiomack91/skills-hello-github-actions/blob/main/README.md"
             }
         ],
         "skills": [
