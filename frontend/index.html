@@ -68,7 +68,8 @@
                         <p class="description">{{ proyecto.descripcion }}</p>
                         <a v-if="proyecto.enlace" :href="proyecto.enlace" class="social-btn project-link"
                             target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i> Ver proyecto en GitHub
+                            <i :class="proyecto.enlace.includes('github.com') ? 'fab fa-github' : 'fas fa-arrow-up-right-from-square'"></i>
+                            {{ proyecto.enlace_texto || 'Ver proyecto en GitHub' }}
                         </a>
                         <div class="skills-container" style="margin-top: 10px; margin-bottom: 15px;">
                             <span class="skill-badge" style="font-size: 12px; padding: 4px 10px;"

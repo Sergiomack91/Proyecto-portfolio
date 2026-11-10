@@ -102,6 +102,13 @@ def get_profile():
                 "tecnologias": ["GitHub Actions", "Docker", "Python", "YAML"]
             },
             {
+                "nombre": "Tienda online MIGS 3D",
+                "descripcion": "Desarrollo de una página web para presentar la colección de productos impresos en 3D de mis amigos, con información sobre los materiales, las opciones de personalización y una vía de contacto para consultas.",
+                "enlace": "https://migs3d.vercel.app/",
+                "enlace_texto": "Ver página web",
+                "tecnologias": ["Nuxt", "Vue.js", "JavaScript"]
+            },
+            {
                 "nombre": "Sistema de Backups Automatizado",
                 "descripcion": "Implementación de copias de seguridad automatizadas en la nube utilizando Google Drive para salvaguardar los datos críticos del servidor y los manifiestos de la infraestructura, asegurando la recuperación ante desastres.",
                 "tecnologias": ["Bash", "Cron", "Google Drive API", "Linux"]
