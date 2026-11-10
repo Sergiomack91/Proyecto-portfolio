@@ -13,7 +13,8 @@ app.add_middleware(
     allow_origins=[
         "https://pruebasergio.com", 
         "https://www.pruebasergio.com",
-        "http://localhost:8080"
+        "http://localhost:8080",
+        "http://localhost:8081"
     ],
     allow_credentials=True,
     allow_methods=["*"],
