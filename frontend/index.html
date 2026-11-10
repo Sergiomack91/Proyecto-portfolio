@@ -15,9 +15,15 @@
 
 <body>
     <div id="app" class="container">
-        <div v-if="!perfil.nombre" class="loading">
+        <div v-if="estadoCarga === 'cargando'" class="loading" role="status" aria-live="polite">
             <div class="spinner"></div>
             <p>Conectando con la API Cloud...</p>
+        </div>
+
+        <div v-else-if="estadoCarga === 'error'" class="section-card load-error" role="alert">
+            <h1>No se pudo cargar el portfolio</h1>
+            <p class="description">{{ errorCarga }}</p>
+            <button class="social-btn" @click="cargarPerfil">Volver a intentarlo</button>
         </div>
 
         <div v-else class="fade-in">
@@ -60,6 +66,10 @@
                     <div class="job" v-for="(proyecto, index) in perfil.proyectos" :key="index">
                         <p class="job-title">{{ proyecto.nombre }}</p>
                         <p class="description">{{ proyecto.descripcion }}</p>
+                        <a v-if="proyecto.enlace" :href="proyecto.enlace" class="social-btn project-link"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i> Ver proyecto en GitHub
+                        </a>
                         <div class="skills-container" style="margin-top: 10px; margin-bottom: 15px;">
                             <span class="skill-badge" style="font-size: 12px; padding: 4px 10px;"
                                 v-for="tech in proyecto.tecnologias" :key="tech">
@@ -69,14 +79,15 @@
                     </div>
                 </div>
                 <div class="section-card">
-                    <h3><i class="fas fa-graduation-cap"></i> Formación y certificaciones</h3>
+                    <h3><i class="fas fa-graduation-cap"></i> Formación académica y cursos</h3>
                     <div class="edu" v-for="(edu, index) in perfil.educacion" :key="index">
                         <p class="job-title">{{ edu.titulo }}</p>
                         <p class="company"><i class="fas fa-university"></i> {{ edu.institucion }}</p>
                         <p class="date"><i class="far fa-calendar-check"></i> {{ edu.fecha }}</p>
+                        <p v-if="edu.descripcion" class="description">{{ edu.descripcion }}</p>
                         <a v-if="edu.enlace" :href="edu.enlace" class="social-btn" target="_blank"
                             rel="noopener noreferrer">
-                            <i class="fas fa-arrow-up-right-from-square"></i> Ver proyecto del curso
+                            <i class="fas fa-arrow-up-right-from-square"></i> Ver curso en GitHub
                         </a>
                     </div>
                 </div>
@@ -106,20 +117,51 @@
             createApp({
                 setup() {
                     const perfil = ref({});
+                    const estadoCarga = ref('cargando');
+                    const errorCarga = ref('');
                     const enviarCorreo = (user, domain) => {
                         window.location.href = `mailto:${user}@${domain}`;
                     };
 
-                    onMounted(async () => {
+                    const cargarPerfil = async () => {
+                        estadoCarga.value = 'cargando';
+                        errorCarga.value = '';
+                        const controller = new AbortController();
+                        const timeoutId = window.setTimeout(() => controller.abort(), 10000);
+
                         try {
-                            const response = await fetch('https://api.pruebasergio.com/api/profile');
-                            perfil.value = await response.json();
+                            const response = await fetch('https://api.pruebasergio.com/api/profile', {
+                                signal: controller.signal
+                            });
+                            if (!response.ok) {
+                                throw new Error(`La API respondió con un error (${response.status}).`);
+                            }
+
+                            const datosPerfil = await response.json();
+                            if (!datosPerfil.nombre) {
+                                throw new Error('La API no devolvió datos de perfil válidos.');
+                            }
+
+                            perfil.value = datosPerfil;
+                            estadoCarga.value = 'listo';
                         } catch (error) {
                             console.error("Error conectando al backend:", error);
+                            if (error instanceof Error && error.name === 'AbortError') {
+                                errorCarga.value = 'La API tardó demasiado en responder. Inténtalo de nuevo.';
+                            } else if (error instanceof Error) {
+                                errorCarga.value = error.message;
+                            } else {
+                                errorCarga.value = 'No se pudo conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.';
+                            }
+                            estadoCarga.value = 'error';
+                        } finally {
+                            window.clearTimeout(timeoutId);
                         }
-                    });
+                    };
 
-                    return { perfil, enviarCorreo };
+                    onMounted(cargarPerfil);
+
+                    return { perfil, estadoCarga, errorCarga, cargarPerfil, enviarCorreo };
                 }
             }).mount('#app');
             function descargarCV() {

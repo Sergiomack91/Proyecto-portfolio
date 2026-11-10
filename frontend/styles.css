@@ -227,11 +227,17 @@ body {
 .social-links {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 15px;
     margin-top: 20px;
 }
 
 .social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
     background: rgba(56, 189, 248, 0.1);
     color: var(--accent-primary);
     text-decoration: none;
@@ -248,6 +254,25 @@ body {
     color: #000;
     transform: translateY(-2px);
 }
+
+.social-btn:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 3px;
+}
+
+.load-error {
+    text-align: center;
+}
+
+.load-error h1 {
+    font-size: 24px;
+}
+
+.load-error .social-btn,
+.project-link {
+    margin-top: 8px;
+}
+
 .cv-container {
     margin-top: 15px;
     display: flex;
@@ -269,4 +294,50 @@ body {
     background: var(--accent-primary);
     color: #000;
     transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 24px 12px;
+    }
+
+    .header-card {
+        padding: 24px 16px;
+    }
+
+    .header-card h1 {
+        font-size: clamp(28px, 8vw, 36px);
+        overflow-wrap: anywhere;
+    }
+
+    .header-card h2 {
+        font-size: 16px;
+    }
+
+    .section-card {
+        padding: 22px 18px;
+    }
+
+    .section-card h3 {
+        font-size: 19px;
+    }
+
+    .social-links {
+        gap: 10px;
+    }
+
+    .social-links .social-btn {
+        flex: 1 1 125px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

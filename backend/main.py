@@ -62,12 +62,14 @@ def get_profile():
             {
                 "titulo": "Administración de Sistemas Informáticos en Red (ASIR)",
                 "institucion": "Formación Profesional de Grado Superior",
-                "fecha": "Finalizado"
+                "fecha": "Finalizado",
+                "descripcion": "Formación en administración de sistemas operativos, redes y servicios, bases de datos y seguridad. Práctica de instalación, configuración y mantenimiento de infraestructuras informáticas."
             },
             {
-                "titulo": "GitHub Actions: skills-hello-github-actions",
+                "titulo": "Curso de GitHub Actions: skills-hello-github-actions",
                 "institucion": "GitHub Skills",
                 "fecha": "Noviembre 2026",
+                "descripcion": "Creación y ejecución de un workflow de GitHub Actions para automatizar tareas del repositorio y comprender cómo se ejecutan los flujos de trabajo.",
                 "enlace": "https://github.com/Sergiomack91/skills-hello-github-actions/blob/main/README.md"
             }
         ],
@@ -96,6 +98,7 @@ def get_profile():
             {
                 "nombre": "Pipeline CI/CD & GitOps",
                 "descripcion": "Despliegue automatizado del portfolio aplicando filosofía GitOps con GitHub Actions. Contenedores Dockerizados, versionado semántico por commit SHA y actualizaciones sin cortes de servicio (Zero-Downtime deployments).",
+                "enlace": "https://github.com/Sergiomack91/Proyecto-portfolio",
                 "tecnologias": ["GitHub Actions", "Docker", "Python", "YAML"]
             },
             {
