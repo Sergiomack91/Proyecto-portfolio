@@ -237,6 +237,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    cursor: pointer;
     min-height: 44px;
     box-sizing: border-box;
     background: rgba(56, 189, 248, 0.1);
