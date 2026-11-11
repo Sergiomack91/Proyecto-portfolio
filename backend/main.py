@@ -43,20 +43,14 @@ def download_cv(req: CaptchaVerification):
 def get_profile():
     return {
         "nombre": "Sergio Rodríguez Quintana",
-        "titular": "Cloud & DevOps Engineer | Operaciones IT",
-        "sobre_mi": "Profesional de Operaciones con formación en Administración de Sistemas Informáticos en Red (ASIR) y experiencia en entornos cloud corporativos. Perfil orientado a Cloud/DevOps, con interés en automatización, infraestructura moderna y mejora continua.",
+        "titular": "Operaciones Cloud | Kubernetes & CI/CD | Orientación SRE",
+        "sobre_mi": "Profesional de Operaciones IT con formación en Administración de Sistemas Informáticos en Red (ASIR) y experiencia en entornos corporativos. Trabajo con Kubernetes, análisis de logs, CI/CD en Azure DevOps, Python y soporte de aplicaciones .NET y Vue. También utilizo ServiceNow para la gestión operativa y, cuando falta el focal point, apoyo en la coordinación del equipo y el seguimiento de tareas. Me interesa seguir creciendo hacia SRE, con foco en confiabilidad, observabilidad y automatización.",
         "experiencia": [
             {
                 "puesto": "Operaciones IT (Proyecto Repsol)",
                 "empresa": "Viewnext",
-                "fecha": "Junio 2026 - Presente",
-                "descripcion": "Participación en proyectos con Microsoft Azure, Vue, .NET, Python, Kubernetes y procesos CI/CD. Colaboración en despliegues, troubleshooting y soporte de aplicaciones en entornos contenerizados."
-            },
-            {
-                "puesto": "Prácticas de Operaciones IT",
-                "empresa": "Viewnext",
-                "fecha": "Febrero 2026 - Mayo 2026",
-                "descripcion": "Prácticas formativas en operaciones, soporte y toma de contacto directa con entornos corporativos reales."
+                "fecha": "Febrero 2026 - Presente",
+                "descripcion": "Incorporación al proyecto en febrero de 2026 mediante prácticas formativas y continuidad en el equipo de operaciones desde junio. Consulta y análisis de logs en Kubernetes, soporte de aplicaciones .NET y Vue, trabajo con pipelines CI/CD en Azure DevOps, Python y ServiceNow. En ausencia del focal point, apoyo en la coordinación del equipo y el seguimiento de tareas operativas."
             }
         ],
         "educacion": [
@@ -75,30 +69,36 @@ def get_profile():
             }
         ],
         "skills": [
-            "Microsoft Azure", 
-            "Kubernetes", 
+            "Kubernetes",
+            "Azure DevOps",
             "Docker",
-            "CI/CD Pipelines", 
-            "Python", 
+            "CI/CD",
+            "Análisis de logs",
+            "Python",
+            ".NET",
             "Vue.js",
+            "ServiceNow",
+            "Prometheus",
+            "Grafana",
+            "Loki",
             "Troubleshooting"
         ],
         "intereses": [
             "Me encanta viajar",
             "Amante de los juegos de mesa y tiempo con amigos",
-            "Tecnología: Automatización de infraestructura y cultura DevOps.",
+            "Tecnología: Confiabilidad de servicios, observabilidad y automatización.",
             "Deportes: Seguidor de la UD Almería, Snowboard, Crossfit, Padel.",
             "Música: Marea, Extremoduro, Natos y Waor, Reality."
         ],
         "proyectos": [
             {
                 "nombre": "Infraestructura Cloud & Homelab",
-                "descripcion": "Diseño, despliegue y administración de un servidor VPS en IONOS (Linux M) con Kubernetes. Incluye Ingress Traefik, monitorización mediante Grafana, Prometheus y Loki, y un sistema de alertas de seguridad automatizado con un bot de Telegram.",
+                "descripcion": "Despliegue y administración de Kubernetes en un VPS con Traefik. Integra Prometheus y Grafana para métricas y dashboards, Loki para consulta de logs y alertas automatizadas por Telegram. Los workloads incluyen sondas de salud, solicitudes y límites de recursos y escalado horizontal.",
                 "tecnologias": ["Kubernetes", "Traefik", "Grafana", "Loki", "IONOS VPS"]
             },
             {
                 "nombre": "Pipeline CI/CD & GitOps",
-                "descripcion": "Despliegue automatizado del portfolio aplicando filosofía GitOps con GitHub Actions. Contenedores Dockerizados, versionado semántico por commit SHA y actualizaciones sin cortes de servicio (Zero-Downtime deployments).",
+                "descripcion": "Entrega automatizada del portfolio con GitHub Actions y despliegues declarativos en Kubernetes. Construcción y publicación de imágenes Docker, versionado por SHA y actualizaciones RollingUpdate para mantener el servicio durante los despliegues.",
                 "enlace": "https://github.com/Sergiomack91/Proyecto-portfolio",
                 "tecnologias": ["GitHub Actions", "Docker", "Python", "YAML"]
             },
@@ -111,7 +111,7 @@ def get_profile():
             },
             {
                 "nombre": "Sistema de Backups Automatizado",
-                "descripcion": "Implementación de copias de seguridad automatizadas en la nube utilizando Google Drive para salvaguardar los datos críticos del servidor y los manifiestos de la infraestructura, asegurando la recuperación ante desastres.",
+                "descripcion": "Copias de seguridad automatizadas en Google Drive para proteger datos del servidor y manifiestos de infraestructura, facilitando su recuperación ante incidencias.",
                 "tecnologias": ["Bash", "Cron", "Google Drive API", "Linux"]
             }
         ],

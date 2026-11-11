@@ -20,13 +20,12 @@
             <p>Conectando con la API Cloud...</p>
         </div>
 
-        <div v-else-if="estadoCarga === 'error'" class="section-card load-error" role="alert">
-            <h1>No se pudo cargar el portfolio</h1>
-            <p class="description">{{ errorCarga }}</p>
-            <button class="social-btn" @click="cargarPerfil">Volver a intentarlo</button>
-        </div>
-
         <div v-else class="fade-in">
+            <div v-if="estadoCarga === 'respaldo'" class="section-card fallback-notice" role="status">
+                <p class="description">No se pudo cargar la API ({{ errorCarga }}). Estás viendo una versión de
+                    respaldo del portfolio.</p>
+                <button class="social-btn" @click="cargarPerfil">Reintentar conexión</button>
+            </div>
             <div class="header-card">
                 <div class="profile-glow"></div>
                 <h1>{{ perfil.nombre }}</h1>
@@ -118,6 +117,36 @@
             const API_BASE_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
                 ? 'http://localhost:8000'
                 : 'https://api.pruebasergio.com';
+            const PERFIL_RESPALDO = {
+                nombre: 'Sergio Rodríguez Quintana',
+                titular: 'Operaciones Cloud | Kubernetes & CI/CD | Orientación SRE',
+                sobre_mi: 'Profesional de Operaciones IT con formación en ASIR y experiencia en entornos corporativos. Trabajo con Kubernetes, análisis de logs, CI/CD en Azure DevOps, Python y soporte de aplicaciones .NET y Vue. También utilizo ServiceNow y, cuando falta el focal point, apoyo en la coordinación del equipo. Me interesa crecer hacia SRE, con foco en confiabilidad, observabilidad y automatización.',
+                experiencia: [{
+                    puesto: 'Operaciones IT (Proyecto Repsol)',
+                    empresa: 'Viewnext',
+                    fecha: 'Febrero 2026 - Presente',
+                    descripcion: 'Incorporación al proyecto en febrero de 2026 mediante prácticas formativas y continuidad en el equipo de operaciones desde junio. Consulta y análisis de logs en Kubernetes, soporte de aplicaciones .NET y Vue, trabajo con pipelines CI/CD en Azure DevOps, Python y ServiceNow. En ausencia del focal point, apoyo en la coordinación del equipo y el seguimiento de tareas operativas.'
+                }],
+                proyectos: [{
+                    nombre: 'Infraestructura Cloud & Homelab',
+                    descripcion: 'Kubernetes en un VPS con Traefik, Prometheus, Grafana y Loki para observabilidad, además de alertas automatizadas por Telegram.',
+                    tecnologias: ['Kubernetes', 'Traefik', 'Prometheus', 'Grafana', 'Loki']
+                }, {
+                    nombre: 'Pipeline CI/CD & GitOps',
+                    descripcion: 'Construcción y publicación de imágenes Docker y despliegues RollingUpdate automatizados con GitHub Actions.',
+                    enlace: 'https://github.com/Sergiomack91/Proyecto-portfolio',
+                    tecnologias: ['GitHub Actions', 'Docker', 'Kubernetes', 'Python']
+                }],
+                educacion: [],
+                skills: ['Kubernetes', 'Azure DevOps', 'CI/CD', 'Análisis de logs', 'Python', '.NET', 'Vue.js', 'ServiceNow', 'Prometheus', 'Grafana', 'Loki'],
+                intereses: [],
+                contacto: {
+                    email_user: 'sergiomack91',
+                    email_domain: 'gmail.com',
+                    github: 'https://github.com/Sergiomack91',
+                    linkedin: 'https://www.linkedin.com/in/sergio-rodr%C3%ADguez-quintana-28bbb02a3/'
+                }
+            };
 
             createApp({
                 setup() {
@@ -147,7 +176,7 @@
                                 throw new Error('La API no devolvió datos de perfil válidos.');
                             }
 
-                            perfil.value = datosPerfil;
+                            perfil.value = { ...PERFIL_RESPALDO, ...datosPerfil };
                             estadoCarga.value = 'listo';
                         } catch (error) {
                             console.error("Error conectando al backend:", error);
@@ -158,7 +187,8 @@
                             } else {
                                 errorCarga.value = 'No se pudo conectar con el servidor. Comprueba tu conexión e inténtalo de nuevo.';
                             }
-                            estadoCarga.value = 'error';
+                            perfil.value = PERFIL_RESPALDO;
+                            estadoCarga.value = 'respaldo';
                         } finally {
                             window.clearTimeout(timeoutId);
                         }

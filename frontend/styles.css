@@ -266,6 +266,15 @@ body {
     text-align: center;
 }
 
+.fallback-notice {
+    text-align: center;
+    border-color: var(--accent-secondary);
+}
+
+.fallback-notice .description {
+    margin-top: 0;
+}
+
 .load-error h1 {
     font-size: 24px;
 }
