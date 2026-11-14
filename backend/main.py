@@ -105,7 +105,7 @@ def get_profile():
             {
                 "nombre": "Tienda online MIGS 3D",
                 "descripcion": "Desarrollo de una página web para presentar la colección de productos impresos en 3D de mis amigos, con información sobre los materiales, las opciones de personalización y una vía de contacto para consultas.",
-                "enlace": "https://migs3d.vercel.app/",
+                "enlace": "https://migs3d.es/",
                 "enlace_texto": "Ver página web",
                 "tecnologias": ["Nuxt", "Vue.js", "JavaScript"]
             },
