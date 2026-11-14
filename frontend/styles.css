@@ -202,9 +202,15 @@ body::before {
     margin: 0 0 10px 0; 
 }
 
-.description { 
-    font-size: 15px; 
+.description {
+    font-size: 15px;
     color: var(--text-secondary);
+}
+
+.strong-copy {
+    margin-top: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
 /* Badges (Etiquetas de Skills) */

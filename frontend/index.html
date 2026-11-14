@@ -36,26 +36,26 @@
                 <div class="profile-glow"></div>
                 <h1>{{ perfil.nombre }}</h1>
                 <h2><i class="fas fa-terminal"></i> {{ perfil.titular }}</h2>
-                <div class="status-pill"><span class="status-dot"></span> Disponible para proyectos y roles Cloud / DevOps</div>
+                <div class="status-pill"><span class="status-dot"></span> Disponible para roles Cloud / DevOps / SRE</div>
 
                 <div class="hero-meta">
-                    <span><i class="fas fa-cloud"></i> Cloud Native</span>
+                    <span><i class="fas fa-cloud"></i> Infraestructuras fiables</span>
                     <span><i class="fas fa-microchip"></i> Automatización</span>
                     <span><i class="fas fa-chart-line"></i> Observabilidad</span>
                 </div>
 
                 <div class="metrics-grid">
                     <div class="metric-card">
-                        <strong>Kubernetes</strong>
-                        <span>Orquestación y alta disponibilidad</span>
+                        <strong>Alta disponibilidad</strong>
+                        <span>Diseño de entornos resilientes sobre Kubernetes</span>
                     </div>
                     <div class="metric-card">
-                        <strong>CI/CD</strong>
-                        <span>Entrega segura y automatizada</span>
+                        <strong>Entrega continua</strong>
+                        <span>Reducir tiempos de despliegue y errores operativos</span>
                     </div>
                     <div class="metric-card">
-                        <strong>SRE</strong>
-                        <span>Confiabilidad, monitoreo y mejora continua</span>
+                        <strong>Confiabilidad</strong>
+                        <span>Monitoreo, alertas y mejora de servicios en producción</span>
                     </div>
                 </div>
 
@@ -77,25 +77,26 @@
                 <div class="section-card">
                     <h3><i class="fas fa-user-astronaut"></i> Sobre mí</h3>
                     <p class="description">{{ perfil.sobre_mi }}</p>
+                    <p class="description strong-copy">Estoy buscando un puesto donde contribuir a la estabilidad, automatización y mejora continua de sistemas críticos en producción.</p>
                 </div>
 
                 <div class="section-card">
-                    <h3><i class="fas fa-rocket"></i> Qué puedo aportar</h3>
+                    <h3><i class="fas fa-rocket"></i> Qué puedo aportar a tu equipo</h3>
                     <div class="value-grid">
                         <div class="value-item">
                             <i class="fas fa-server"></i>
                             <h4>Infraestructuras fiables</h4>
-                            <p>Diseño y operación de entornos cloud con Kubernetes, automatización y políticas de resiliencia.</p>
+                            <p>Diseño y operación de entornos cloud con Kubernetes, automatización y políticas de resiliencia para reducir riesgos.</p>
                         </div>
                         <div class="value-item">
                             <i class="fas fa-code-branch"></i>
                             <h4>Entrega continua</h4>
-                            <p>Implementación de pipelines CI/CD, despliegues seguros y mejora del ciclo de entrega.</p>
+                            <p>Implementación de pipelines CI/CD, despliegues seguros y mejora del ciclo de entrega para acelerar la innovación sin perder control.</p>
                         </div>
                         <div class="value-item">
                             <i class="fas fa-chart-bar"></i>
                             <h4>Observabilidad</h4>
-                            <p>Monitoreo, análisis de logs, alertas y resolución de incidencias con enfoque en estabilidad.</p>
+                            <p>Monitoreo, análisis de logs y alertas para detectar incidencias antes de que impacten al usuario final.</p>
                         </div>
                     </div>
                 </div>
@@ -162,7 +163,7 @@
 
                 <div class="section-card cta-card">
                     <h3><i class="fas fa-handshake"></i> ¿Hablamos?</h3>
-                    <p class="description">Estoy abierto a proyectos de infraestructura cloud, automatización, observabilidad y mejora del rendimiento de sistemas en producción.</p>
+                    <p class="description">Estoy buscando un rol donde poder aportar valor en infraestructura cloud, automatización, observabilidad y mejora continua de servicios en producción.</p>
                     <div class="social-links">
                         <button @click="enviarCorreo(perfil.contacto.email_user, perfil.contacto.email_domain)" class="social-btn">
                             <i class="fas fa-envelope"></i> Contactar por email
@@ -183,7 +184,7 @@
             const PERFIL_RESPALDO = {
                 nombre: 'Sergio Rodríguez Quintana',
                 titular: 'Cloud & DevOps Engineer | Kubernetes, CI/CD y SRE',
-                sobre_mi: 'Profesional de Operaciones IT con formación en ASIR, experiencia en entornos corporativos y una fuerte orientación a la fiabilidad de servicios. Trabajo con Kubernetes, análisis de logs, CI/CD en Azure DevOps, Python y soporte de aplicaciones .NET y Vue. También utilizo ServiceNow y, cuando falta el focal point, apoyo en la coordinación del equipo y la mejora continua del servicio. Mi foco está en la confiabilidad, la observabilidad y la automatización para construir entornos más estables y escalables.',
+                sobre_mi: 'Profesional de Operaciones IT con formación en ASIR, experiencia en entornos corporativos y una fuerte orientación a la fiabilidad de servicios. Trabajo con Kubernetes, análisis de logs, CI/CD en Azure DevOps, Python y soporte de aplicaciones .NET y Vue. También utilizo ServiceNow y, cuando falta el focal point, apoyo en la coordinación del equipo y la mejora continua del servicio. Mi foco está en la confiabilidad, la observabilidad y la automatización para construir entornos más estables, seguros y escalables.',
                 experiencia: [{
                     puesto: 'Operaciones IT (Proyecto Repsol)',
                     empresa: 'Viewnext',
