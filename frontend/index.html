@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Sergio Rodríguez Quintana, Cloud Engineer especializado en Kubernetes, CI/CD, automatización y observabilidad.">
+    <meta name="keywords" content="Sergio Rodríguez Quintana, DevOps, Cloud, Kubernetes, CI/CD, SRE, Azure DevOps, Observabilidad">
+    <meta property="og:title" content="Sergio Rodríguez Quintana | Cloud & DevOps Engineer">
+    <meta property="og:description" content="Especialista en Kubernetes, automatización, observabilidad y entrega continua.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.pruebasergio.com">
     <title>Sergio Rodríguez Quintana - Portfolio</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -30,6 +36,28 @@
                 <div class="profile-glow"></div>
                 <h1>{{ perfil.nombre }}</h1>
                 <h2><i class="fas fa-terminal"></i> {{ perfil.titular }}</h2>
+
+                <div class="hero-meta">
+                    <span><i class="fas fa-cloud"></i> Cloud Native</span>
+                    <span><i class="fas fa-microchip"></i> Automatización</span>
+                    <span><i class="fas fa-chart-line"></i> Observabilidad</span>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <strong>Kubernetes</strong>
+                        <span>Orquestación y alta disponibilidad</span>
+                    </div>
+                    <div class="metric-card">
+                        <strong>CI/CD</strong>
+                        <span>Entrega segura y automatizada</span>
+                    </div>
+                    <div class="metric-card">
+                        <strong>SRE</strong>
+                        <span>Confiabilidad, monitoreo y mejora continua</span>
+                    </div>
+                </div>
+
                 <div class="social-links">
                     <a :href="perfil.contacto.github" target="_blank" class="social-btn"><i class="fab fa-github"></i>
                         GitHub</a>
@@ -48,6 +76,27 @@
                 <div class="section-card">
                     <h3><i class="fas fa-user-astronaut"></i> Sobre mí</h3>
                     <p class="description">{{ perfil.sobre_mi }}</p>
+                </div>
+
+                <div class="section-card">
+                    <h3><i class="fas fa-rocket"></i> Qué puedo aportar</h3>
+                    <div class="value-grid">
+                        <div class="value-item">
+                            <i class="fas fa-server"></i>
+                            <h4>Infraestructuras fiables</h4>
+                            <p>Diseño y operación de entornos cloud con Kubernetes, automatización y políticas de resiliencia.</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-code-branch"></i>
+                            <h4>Entrega continua</h4>
+                            <p>Implementación de pipelines CI/CD, despliegues seguros y mejora del ciclo de entrega.</p>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <h4>Observabilidad</h4>
+                            <p>Monitoreo, análisis de logs, alertas y resolución de incidencias con enfoque en estabilidad.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="section-card">
@@ -109,6 +158,19 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="section-card cta-card">
+                    <h3><i class="fas fa-handshake"></i> ¿Hablamos?</h3>
+                    <p class="description">Estoy abierto a proyectos de infraestructura cloud, automatización, observabilidad y mejora del rendimiento de sistemas en producción.</p>
+                    <div class="social-links">
+                        <button @click="enviarCorreo(perfil.contacto.email_user, perfil.contacto.email_domain)" class="social-btn">
+                            <i class="fas fa-envelope"></i> Contactar por email
+                        </button>
+                        <a :href="perfil.contacto.linkedin" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -119,8 +181,8 @@
                 : 'https://api.pruebasergio.com';
             const PERFIL_RESPALDO = {
                 nombre: 'Sergio Rodríguez Quintana',
-                titular: 'Operaciones Cloud | Kubernetes & CI/CD | Orientación SRE',
-                sobre_mi: 'Profesional de Operaciones IT con formación en ASIR y experiencia en entornos corporativos. Trabajo con Kubernetes, análisis de logs, CI/CD en Azure DevOps, Python y soporte de aplicaciones .NET y Vue. También utilizo ServiceNow y, cuando falta el focal point, apoyo en la coordinación del equipo. Me interesa crecer hacia SRE, con foco en confiabilidad, observabilidad y automatización.',
+                titular: 'Cloud & DevOps Engineer | Kubernetes, CI/CD y SRE',
+                sobre_mi: 'Profesional de Operaciones IT con formación en ASIR, experiencia en entornos corporativos y una fuerte orientación a la fiabilidad de servicios. Trabajo con Kubernetes, análisis de logs, CI/CD en Azure DevOps, Python y soporte de aplicaciones .NET y Vue. También utilizo ServiceNow y, cuando falta el focal point, apoyo en la coordinación del equipo y la mejora continua del servicio. Mi foco está en la confiabilidad, la observabilidad y la automatización para construir entornos más estables y escalables.',
                 experiencia: [{
                     puesto: 'Operaciones IT (Proyecto Repsol)',
                     empresa: 'Viewnext',
