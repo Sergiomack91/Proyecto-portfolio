@@ -1,26 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent-primary: #38bdf8;
-    --accent-secondary: #818cf8;
-    --border-color: #334155;
+    --bg-color: #07131f;
+    --bg-color-soft: #0f1c2e;
+    --card-bg: rgba(15, 23, 42, 0.82);
+    --card-bg-strong: rgba(30, 41, 59, 0.9);
+    --text-primary: #e2e8f0;
+    --text-secondary: #a7b6cc;
+    --accent-primary: #5eead4;
+    --accent-secondary: #7c9cff;
+    --accent-tertiary: #38bdf8;
+    --border-color: rgba(148, 163, 184, 0.22);
+    --shadow-soft: 0 20px 45px rgba(2, 6, 23, 0.45);
 }
 
-body { 
-    font-family: 'Inter', sans-serif; 
-    background-color: var(--bg-color); 
+body {
+    font-family: 'Inter', sans-serif;
+    background:
+        radial-gradient(circle at top, rgba(124, 156, 255, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(94, 234, 212, 0.13), transparent 25%),
+        linear-gradient(180deg, var(--bg-color) 0%, var(--bg-color-soft) 100%);
     color: var(--text-primary);
-    margin: 0; 
-    padding: 40px 20px; 
+    margin: 0;
+    padding: 40px 20px;
     line-height: 1.6;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
 }
 
 .container { 
-    max-width: 850px; 
+    max-width: 1100px; 
     margin: 0 auto; 
 }
 
@@ -35,15 +53,16 @@ body {
 
 /* Tarjeta de Cabecera */
 .header-card { 
-    background: var(--card-bg);
-    padding: 40px; 
-    border-radius: 16px; 
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.75));
+    padding: 46px 40px 36px; 
+    border-radius: 24px; 
     margin-bottom: 30px; 
     text-align: center; 
     border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    box-shadow: var(--shadow-soft);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(8px);
 }
 
 /* Efecto de brillo de fondo en la cabecera */
@@ -52,47 +71,70 @@ body {
     top: -50px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 100px;
-    background: var(--accent-primary);
-    filter: blur(80px);
-    opacity: 0.3;
+    width: 220px;
+    height: 120px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    filter: blur(90px);
+    opacity: 0.4;
 }
 
 .header-card h1 { 
-    margin: 0; 
-    font-size: 36px; 
-    font-weight: 700;
-    /* Texto con gradiente */
-    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    margin: 0;
+    font-size: clamp(2.3rem, 4.5vw, 4rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #ecfeff 0%, var(--accent-primary) 25%, #a5b4fc 55%, #e2e8f0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.06em;
+    line-height: 1.05;
 }
 
 .header-card h2 { 
-    margin: 15px 0 0 0; 
-    font-size: 18px; 
-    color: var(--text-secondary); 
-    font-weight: 400; 
+    margin: 18px 0 0 0; 
+    font-size: clamp(1.05rem, 1.8vw, 1.45rem);
+    color: var(--text-secondary);
+    font-weight: 500; 
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: #d7fdf5;
+    background: rgba(94, 234, 212, 0.08);
+    border: 1px solid rgba(94, 234, 212, 0.24);
+    box-shadow: inset 0 0 12px rgba(94, 234, 212, 0.06);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #34d399, #22d3ee);
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.9);
 }
 
 /* Tarjetas de Secciones */
 .section-card { 
-    background: var(--card-bg); 
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.75));
     padding: 30px; 
-    border-radius: 16px; 
+    border-radius: 20px; 
     margin-bottom: 25px; 
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 /* Efecto al pasar el ratón por las tarjetas */
 .section-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
-    border-color: var(--accent-secondary);
+    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.28);
+    border-color: rgba(124, 156, 255, 0.6);
 }
 
 .section-card h3 { 
@@ -115,12 +157,16 @@ body {
     margin-bottom: 25px; 
     position: relative;
     padding-left: 20px;
-    border-left: 2px solid var(--border-color);
+    border-left: 2px solid rgba(148, 163, 184, 0.3);
+    background: rgba(148, 163, 184, 0.02);
+    border-radius: 0 14px 14px 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .job:last-child, .edu:last-child { margin-bottom: 0; }
 
 .job-title { 
-    font-weight: 600; 
+    font-weight: 700; 
     font-size: 18px; 
     margin: 0 0 5px 0; 
     color: var(--text-primary);
@@ -128,7 +174,7 @@ body {
 
 .company { 
     color: var(--accent-primary); 
-    font-weight: 500; 
+    font-weight: 600; 
     font-size: 15px; 
     margin: 0 0 8px 0; 
 }
@@ -158,21 +204,21 @@ body {
 }
 
 .skill-badge { 
-    background-color: rgba(56, 189, 248, 0.1); 
-    color: var(--accent-primary); 
-    font-weight: 500; 
+    background: linear-gradient(135deg, rgba(94, 234, 212, 0.12), rgba(124, 156, 255, 0.12));
+    color: #cbe7ff;
+    font-weight: 600;
     padding: 8px 16px; 
-    border-radius: 20px; 
+    border-radius: 999px;
     font-size: 14px; 
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(148, 163, 184, 0.2);
     transition: all 0.2s ease;
     cursor: default;
 }
 
 .skill-badge:hover {
-    background-color: var(--accent-primary);
-    color: #000;
-    transform: scale(1.05);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #06131b;
+    transform: translateY(-1px) scale(1.02);
 }
 
 /* Lista de Intereses */
@@ -289,23 +335,25 @@ body {
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    min-height: 44px;
+    min-height: 46px;
     box-sizing: border-box;
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--accent-primary);
+    background: linear-gradient(135deg, rgba(94, 234, 212, 0.12), rgba(124, 156, 255, 0.14));
+    color: var(--text-primary);
     text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 10px 18px;
+    border-radius: 12px;
     font-size: 14px;
-    font-weight: 500;
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    transition: all 0.2s ease;
+    font-weight: 600;
+    border: 1px solid rgba(124, 156, 255, 0.28);
+    transition: all 0.25s ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .social-btn:hover {
-    background: var(--accent-primary);
-    color: #000;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #05151d;
     transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(94, 234, 212, 0.16);
 }
 
 .social-btn:focus-visible {
@@ -342,19 +390,19 @@ body {
 }
 
 .download-btn {
-   background: rgba(56, 189, 248, 0.1);
-    color: var(--accent-primary);
+    background: linear-gradient(135deg, rgba(94, 234, 212, 0.2), rgba(124, 156, 255, 0.2));
+    color: var(--text-primary);
     text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 11px 20px;
+    border-radius: 12px;
     font-size: 14px;
-    font-weight: 500;
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    font-weight: 700;
+    border: 1px solid rgba(94, 234, 212, 0.3);
     transition: all 0.2s ease;
 }
 .download-btn:hover {
-    background: var(--accent-primary);
-    color: #000;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #05151d;
     transform: translateY(-2px);
 }
 
@@ -425,7 +473,7 @@ body {
     }
 
     .header-card {
-        padding: 24px 16px;
+        padding: 30px 18px 24px;
     }
 
     .header-card h1 {
@@ -435,6 +483,11 @@ body {
 
     .header-card h2 {
         font-size: 16px;
+    }
+
+    .status-pill {
+        font-size: 0.75rem;
+        padding: 8px 12px;
     }
 
     .section-card {
